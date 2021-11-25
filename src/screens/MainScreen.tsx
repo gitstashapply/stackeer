@@ -22,7 +22,7 @@ export default () => {
 
   const validateId = () => {};
 
-  const onBtnPress = async () => {
+  const onSubmit = async () => {
     const user = await getUserById(parseInt(inputValue));
     console.log(user);
   };
@@ -30,14 +30,11 @@ export default () => {
   return (
     <View style={styles.container}>
       <AnimatedSearchInput
+        handleSubmit={onSubmit}
         isValid={isInputValid}
         inputValue={inputValue}
         onChange={onInputChange}
       />
-
-      <TouchableOpacity onPress={onBtnPress}>
-        <Text>adasdas</Text>
-      </TouchableOpacity>
     </View>
   );
 };

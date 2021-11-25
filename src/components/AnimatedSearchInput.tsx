@@ -22,9 +22,15 @@ interface AnimatedInputProps {
   onChange: (value: string) => void;
   inputValue: string;
   isValid: boolean;
+  handleSubmit: () => void;
 }
 
-export default ({onChange, inputValue, isValid}: AnimatedInputProps) => {
+export default ({
+  onChange,
+  inputValue,
+  isValid,
+  handleSubmit,
+}: AnimatedInputProps) => {
   const animatedValue = useSharedValue(0);
   const inputRef = createRef<TextInput>();
 
@@ -78,8 +84,18 @@ export default ({onChange, inputValue, isValid}: AnimatedInputProps) => {
     inputRef.current?.focus();
   };
 
+  const handlePress = () => {
+    if (isValid) {
+      handleSubmit();
+    } else {
+      onSearchBtnPress();
+    }
+  };
+
   return (
-    <TouchableOpacity onPress={onSearchBtnPress}>
+    <TouchableOpacity
+      disabled={!isValid && !!animatedValue.value}
+      onPress={handlePress}>
       <Animated.View style={[animatedStylesContainer, styles.btnContainer]}>
         <AnimatedIcon
           style={searchIconAnimatedStyles}
