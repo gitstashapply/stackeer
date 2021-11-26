@@ -1,6 +1,6 @@
 import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios';
 import {userDatatransormer} from './apiTransformer';
-import {UserApiResponse} from './types';
+import {ItemQuestions, QuestionsApiResponse, UserApiResponse} from './types';
 
 const BASE_URL = 'https://api.stackexchange.com/2.3/';
 
@@ -27,4 +27,12 @@ export const getUserById = async (userId: number) => {
   const user = userDatatransormer(res?.data, userId);
 
   return user;
+};
+
+export const getQuestionsByUserId = async (userId: number) => {
+  const res = await get<QuestionsApiResponse>(
+    `users/${userId}/questions?order=desc&sort=activity&site=stackoverflow`,
+  );
+
+  return res?.data.items;
 };

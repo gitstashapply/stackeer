@@ -12,6 +12,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
+import {ColorPalette} from '../Themes/Colors';
 
 const {width} = Dimensions.get('screen');
 
@@ -32,41 +33,33 @@ export default ({
   handleSubmit,
 }: AnimatedInputProps) => {
   const animatedValue = useSharedValue(0);
+  const translationAnimation = useSharedValue(0);
+  const validationAnimatedValue = useSharedValue<number | string>(
+    ColorPalette.SECONDARY,
+  );
+
   const inputRef = createRef<TextInput>();
-
-  const validationAnimatedValue = useSharedValue<number | string>('black');
-
-  const setValidationAnimatedValue = () => {
-    console.log(validationAnimatedValue, isValid);
-    if (isValid) {
-      validationAnimatedValue.value = withTiming('green', {duration: 250});
-    } else if (!isValid && !!!inputValue) {
-      validationAnimatedValue.value = withTiming('black', {duration: 250});
-    } else {
-      validationAnimatedValue.value = withTiming('red', {duration: 250});
-    }
-  };
 
   useEffect(() => {
     setValidationAnimatedValue();
   }, [isValid, inputValue]);
 
+  const setValidationAnimatedValue = () => {
+    validationAnimatedValue.value = withTiming(ColorPalette.SECONDARY, {
+      duration: 250,
+    });
+  };
+
   const animatedStylesContainer = useAnimatedStyle(() => {
     return {
-      width: withSpring(animatedValue.value === 0 ? 70 : width * 0.8),
+      width: withSpring(animatedValue.value === 0 ? 70 : width * 0.87),
       backgroundColor: validationAnimatedValue.value,
     };
   });
 
   const searchIconAnimatedStyles = useAnimatedStyle(() => {
     return {
-      transform: [
-        {
-          translateX: withSpring(
-            animatedValue.value ? -((width * 0.8) / 3) : 0,
-          ),
-        },
-      ],
+      marginHorizontal: animatedValue.value ? 12 : 0,
     };
   });
 
@@ -101,15 +94,14 @@ export default ({
           style={searchIconAnimatedStyles}
           size={40}
           name={'search'}
-          color={'white'}
+          color={ColorPalette.CAPTION}
         />
         <AnimatedTextInput
           ref={inputRef}
           style={[textInputAnimatedStyles, styles.input]}
           onChangeText={onChange}
           value={inputValue}
-          selectionColor={'white'}
-          placeholder="useless placeholder"
+          selectionColor={ColorPalette.MAIN}
           keyboardType="numeric"
         />
       </Animated.View>
@@ -133,10 +125,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 8,
     elevation: 2,
+    flexDirection: 'row',
   },
   input: {
-    position: 'absolute',
+    // position: 'absolute',
     alignSelf: 'center',
-    color: 'white',
+    color: ColorPalette.MAIN,
   },
 });

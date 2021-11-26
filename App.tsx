@@ -12,6 +12,7 @@ import React from 'react';
 import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
 import MainScreen from './src/screens/MainScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {ColorPalette} from './src/Themes/Colors';
 
 Icon.loadFont();
 
@@ -19,7 +20,7 @@ const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: ColorPalette.MAIN}}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <MainScreen />
     </SafeAreaView>
