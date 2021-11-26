@@ -8,9 +8,11 @@ import {Caption, Title} from './Text';
 import SilverBadge from '../silverBadge.png';
 import BronzeBadge from '../bronzeBadge.png';
 import GoldBadge from '../goldBadge.png';
-import {ColorPalette} from '../Themes/Colors';
+import {useColors} from './common/Colors/ColorsProvider';
 
 export default ({user}: {user: ItemsEntity}) => {
+  const {colors} = useColors();
+
   const renderBadges = () => {
     return (
       <View style={styles.flexRow}>
@@ -22,13 +24,15 @@ export default ({user}: {user: ItemsEntity}) => {
   };
 
   return (
-    <View style={styles.card}>
+    <View style={[styles.card]}>
       <View style={styles.flexRow}>
         <Image style={styles.img} source={{uri: user.profile_image}} />
         <View style={{marginHorizontal: 20}}>
-          <Title>{user.display_name}</Title>
+          <Title style={{color: colors.MAIN}}>{user.display_name}</Title>
           <Caption>{`Reputation: ${user.reputation}`}</Caption>
-          <Caption style={{color: ColorPalette.GRAY}}>{user.location}</Caption>
+          <Caption>{`Accept rate: ${user.accept_rate}`}</Caption>
+
+          <Caption style={{color: colors.GRAY}}>{user.location}</Caption>
           {renderBadges()}
         </View>
       </View>

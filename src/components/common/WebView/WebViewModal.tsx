@@ -15,9 +15,6 @@ import {WebViewModalContext} from './WebViewModalProvider';
 export default () => {
   const {isModalOpened, url, handleClose} = useContext(WebViewModalContext);
 
-  console.log(url);
-  console.log(isModalOpened);
-
   if (!isModalOpened) {
     return <View />;
   }

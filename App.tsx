@@ -12,24 +12,28 @@ import React from 'react';
 import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
 import MainScreen from './src/screens/MainScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {ColorPalette} from './src/Themes/Colors';
 import WebViewModalProvider from './src/components/common/WebView/WebViewModalProvider';
 import {View} from 'react-native';
+import {
+  ColorsProvider,
+  useColors,
+} from './src/components/common/Colors/ColorsProvider';
 
 Icon.loadFont();
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
+  const {colors} = useColors();
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: ColorPalette.MAIN}}>
-      <View style={{flex: 1}}>
+    <ColorsProvider>
+      <>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
         <WebViewModalProvider>
           <MainScreen />
         </WebViewModalProvider>
-      </View>
-    </SafeAreaView>
+      </>
+    </ColorsProvider>
   );
 };
 

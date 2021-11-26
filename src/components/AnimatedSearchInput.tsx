@@ -13,6 +13,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import {ColorPalette} from '../Themes/Colors';
+import {useColors} from './common/Colors/ColorsProvider';
 
 const {width} = Dimensions.get('screen');
 
@@ -33,10 +34,11 @@ export default ({
   handleSubmit,
 }: AnimatedInputProps) => {
   const animatedValue = useSharedValue(0);
-  const translationAnimation = useSharedValue(0);
   const validationAnimatedValue = useSharedValue<number | string>(
     ColorPalette.SECONDARY,
   );
+
+  const {colors} = useColors();
 
   const inputRef = createRef<TextInput>();
 
@@ -53,7 +55,6 @@ export default ({
   const animatedStylesContainer = useAnimatedStyle(() => {
     return {
       width: withSpring(animatedValue.value === 0 ? 70 : width * 0.87),
-      backgroundColor: validationAnimatedValue.value,
     };
   });
 
@@ -89,19 +90,24 @@ export default ({
     <TouchableOpacity
       disabled={!isValid && !!animatedValue.value}
       onPress={handlePress}>
-      <Animated.View style={[animatedStylesContainer, styles.btnContainer]}>
+      <Animated.View
+        style={[
+          styles.btnContainer,
+          animatedStylesContainer,
+          {backgroundColor: colors.SECONDARY},
+        ]}>
         <AnimatedIcon
           style={searchIconAnimatedStyles}
           size={40}
           name={'search'}
-          color={ColorPalette.CAPTION}
+          color={colors.MAIN}
         />
         <AnimatedTextInput
           ref={inputRef}
-          style={[textInputAnimatedStyles, styles.input]}
+          style={[textInputAnimatedStyles, styles.input, {color: colors.MAIN}]}
           onChangeText={onChange}
           value={inputValue}
-          selectionColor={ColorPalette.MAIN}
+          selectionColor={colors.MAIN}
           keyboardType="numeric"
         />
       </Animated.View>

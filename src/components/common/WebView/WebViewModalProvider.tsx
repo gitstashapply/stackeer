@@ -15,7 +15,6 @@ export const useWebViewModal = () => {
   const [url, setUrl] = useState<string | null>(null);
 
   const setModalOpen = (url: string) => {
-    console.log('HOOOK', url);
     setUrl(url);
     setModalOpened(true);
   };

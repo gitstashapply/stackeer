@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import Animated, {ZoomIn} from 'react-native-reanimated';
 import {ItemsEntity} from '../services/types';
-import {ColorPalette} from '../Themes/Colors';
+import {useColors} from './common/Colors/ColorsProvider';
 import UserCard from './UserCard';
 
 interface Props {
@@ -12,8 +12,12 @@ interface Props {
 Animated.addWhitelistedNativeProps({text: true});
 
 export default ({userData}: Props) => {
+  const {colors} = useColors();
+
   return (
-    <Animated.View entering={ZoomIn} style={[styles.container]}>
+    <Animated.View
+      entering={ZoomIn}
+      style={[styles.container, {backgroundColor: colors.SECONDARY}]}>
       <UserCard user={userData} />
     </Animated.View>
   );
@@ -22,7 +26,6 @@ export default ({userData}: Props) => {
 const styles = StyleSheet.create({
   container: {
     height: '30%',
-    backgroundColor: ColorPalette.SECONDARY,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     borderRadius: 20,

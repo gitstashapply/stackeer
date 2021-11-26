@@ -1,6 +1,7 @@
 import React, {ReactChild} from 'react';
 import {Text as RNText, TextProps} from 'react-native';
 import {ColorPalette} from '../Themes/Colors';
+import {useColors} from './common/Colors/ColorsProvider';
 
 export enum Fonts {
   POPPINS_BLACK = 'Poppins-Bold',
@@ -13,6 +14,8 @@ type Props = TextProps & {
 };
 
 export const Title = (props: Props) => {
+  const {colors} = useColors();
+
   return (
     <RNText
       {...props}
@@ -20,7 +23,7 @@ export const Title = (props: Props) => {
         {
           fontFamily: Fonts.POPPINS_BLACK,
           fontSize: 24,
-          color: ColorPalette.MAIN,
+          color: colors.SECONDARY,
         },
         props.style,
       ]}>
@@ -30,6 +33,8 @@ export const Title = (props: Props) => {
 };
 
 export const Text = (props: Props) => {
+  const {colors} = useColors();
+
   return (
     <RNText
       {...props}
@@ -37,6 +42,7 @@ export const Text = (props: Props) => {
         {
           fontFamily: Fonts.POPPINS_REGULAR,
           fontSize: 16,
+          color: colors.SECONDARY,
         },
         props.style,
       ]}>
@@ -46,6 +52,8 @@ export const Text = (props: Props) => {
 };
 
 export const Caption = (props: Props) => {
+  const {colors} = useColors();
+
   return (
     <RNText
       {...props}
@@ -53,7 +61,7 @@ export const Caption = (props: Props) => {
         {
           fontFamily: Fonts.POPPINS_THIN,
           fontSize: 14,
-          color: ColorPalette.CAPTION,
+          color: colors.CAPTION,
         },
         props.style,
       ]}>

@@ -10,17 +10,22 @@ import {ColorPalette} from '../Themes/Colors';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import AnsweredBadge from './AnsweredBadge';
 import {WebViewModalContext} from './common/WebView/WebViewModalProvider';
+import {useColors} from './common/Colors/ColorsProvider';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 const Tag = ({tag}: {tag: string}): ReactElement => {
+  const {colors} = useColors();
+
   return (
-    <View key={tag} style={styles.tag}>
-      <Caption>{tag}</Caption>
+    <View key={tag} style={[styles.tag, {borderColor: colors.MAIN}]}>
+      <Caption style={{color: colors.MAIN}}>{tag}</Caption>
     </View>
   );
 };
 
 export default ({data}: {data: ItemQuestions}): ReactElement => {
   const {handleOpen} = useContext(WebViewModalContext);
+  const {colors} = useColors();
 
   const handleWebViewModalOpen = () => {
     handleOpen(data.link);
@@ -28,9 +33,9 @@ export default ({data}: {data: ItemQuestions}): ReactElement => {
 
   return (
     <Animated.View entering={LightSpeedInRight} style={styles.shadowWrapper}>
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: colors.SECONDARY}]}>
         <AnsweredBadge isAnswered={data.is_answered} />
-        <Title style={{fontSize: 18}}>{data.title}</Title>
+        <Title style={{fontSize: 18, color: colors.MAIN}}>{data.title}</Title>
         <Caption style={{color: '#808080'}}>{`Created: ${unixToFormatedDate(
           data.creation_date,
         )}`}</Caption>
@@ -43,7 +48,9 @@ export default ({data}: {data: ItemQuestions}): ReactElement => {
           <TouchableOpacity
             onPress={handleWebViewModalOpen}
             style={styles.btnContainer}>
-            <Text style={styles.btnText}>OPEN QUESTION</Text>
+            <Text style={[styles.btnText, {color: colors.MAIN}]}>
+              OPEN QUESTION
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -66,7 +73,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     overflow: 'hidden',
-    backgroundColor: ColorPalette.SECONDARY,
     borderRadius: 20,
   },
   btn: {
@@ -77,7 +83,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   btnText: {
-    color: ColorPalette.MAIN,
     textDecorationLine: 'underline',
   },
   tag: {
@@ -85,7 +90,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 4,
     margin: 4,
-    borderColor: '#ef8236',
   },
   tagContainer: {
     flexDirection: 'row',

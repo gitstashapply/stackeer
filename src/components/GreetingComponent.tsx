@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 import {View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {ColorPalette} from '../Themes/Colors';
+import {useColors} from './common/Colors/ColorsProvider';
 import WebViewModal from './common/WebView/WebViewModal';
 import {
   useWebViewModal,
@@ -11,6 +12,7 @@ import {Title} from './Text';
 
 export default () => {
   const {handleOpen} = useContext(WebViewModalContext);
+  const {colors} = useColors();
 
   const openWebView = () => {
     handleOpen(
@@ -18,17 +20,19 @@ export default () => {
     );
   };
 
+  console.log(colors.MAIN);
+
   return (
-    <View style={{padding: 20, flex: 0}}>
-      <Title style={{fontSize: 52, color: 'white'}}>STACKEER</Title>
-      <Title style={{fontSize: 36, color: ColorPalette.SECONDARY}}>
+    <View style={{padding: 20, flex: 0, backgroundColor: colors.MAIN}}>
+      <Title style={{fontSize: 52, color: colors.SECONDARY}}>STACKEER</Title>
+      <Title style={{fontSize: 36, color: colors.SECONDARY}}>
         ITS VERY IMPORTANT APP
       </Title>
       <TouchableOpacity onPress={openWebView}>
         <Title
           style={{
             fontSize: 24,
-            color: 'white',
+            color: colors.SECONDARY,
             textDecorationLine: 'underline',
           }}>
           ABOUT US
