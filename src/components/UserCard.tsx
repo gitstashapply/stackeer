@@ -1,18 +1,19 @@
 import React from 'react';
-import {View, Image, Text} from 'react-native';
+import {View, Image, Text, StyleSheet} from 'react-native';
 import {SCRREN_WIDTH} from '../helpers/screenHelpers';
 import {ItemsEntity} from '../services/types';
 import Badge from './Badge';
-import {Title} from './Text';
+import {Caption, Title} from './Text';
 //@ts-ignore
 import SilverBadge from '../silverBadge.png';
 import BronzeBadge from '../bronzeBadge.png';
 import GoldBadge from '../goldBadge.png';
+import {ColorPalette} from '../Themes/Colors';
 
 export default ({user}: {user: ItemsEntity}) => {
   const renderBadges = () => {
     return (
-      <View style={{flexDirection: 'row'}}>
+      <View style={styles.flexRow}>
         <Badge badgeCount={user.badge_counts.bronze} image={BronzeBadge} />
         <Badge badgeCount={user.badge_counts.silver} image={SilverBadge} />
         <Badge badgeCount={user.badge_counts.gold} image={GoldBadge} />
@@ -21,19 +22,31 @@ export default ({user}: {user: ItemsEntity}) => {
   };
 
   return (
-    <View style={{padding: 20, width: SCRREN_WIDTH * 0.87}}>
-      <View style={{flexDirection: 'row'}}>
-        <Image
-          style={{height: 100, width: 100, borderRadius: 50}}
-          source={{uri: user.profile_image}}
-        />
+    <View style={styles.card}>
+      <View style={styles.flexRow}>
+        <Image style={styles.img} source={{uri: user.profile_image}} />
         <View style={{marginHorizontal: 20}}>
           <Title>{user.display_name}</Title>
-          <Text>{user.location}</Text>
-          <Text>{`Reputation: ${user.reputation}`}</Text>
+          <Caption>{`Reputation: ${user.reputation}`}</Caption>
+          <Caption style={{color: ColorPalette.GRAY}}>{user.location}</Caption>
           {renderBadges()}
         </View>
       </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  card: {
+    padding: 20,
+    width: SCRREN_WIDTH * 0.87,
+  },
+  flexRow: {
+    flexDirection: 'row',
+  },
+  img: {
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+  },
+});

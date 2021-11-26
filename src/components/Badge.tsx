@@ -6,7 +6,9 @@ import {
   Easing,
   useDerivedValue,
 } from 'react-native-reanimated';
+import {ColorPalette} from '../Themes/Colors';
 import AnimatedText from './AnimatedText';
+import {Fonts} from './Text';
 
 export default ({badgeCount, image}: any) => {
   const animated = useSharedValue(0);
@@ -37,6 +39,8 @@ const styles = StyleSheet.create({
     height: 40,
   },
   badgeText: {
+    color: ColorPalette.MAIN,
     alignSelf: 'center',
+    fontFamily: Fonts.POPPINS_BLACK,
   },
 });

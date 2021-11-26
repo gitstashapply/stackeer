@@ -13,6 +13,8 @@ import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
 import MainScreen from './src/screens/MainScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {ColorPalette} from './src/Themes/Colors';
+import WebViewModalProvider from './src/components/common/WebView/WebViewModalProvider';
+import {View} from 'react-native';
 
 Icon.loadFont();
 
@@ -21,8 +23,12 @@ const App = () => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: ColorPalette.MAIN}}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <MainScreen />
+      <View style={{flex: 1}}>
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <WebViewModalProvider>
+          <MainScreen />
+        </WebViewModalProvider>
+      </View>
     </SafeAreaView>
   );
 };

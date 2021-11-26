@@ -14,8 +14,12 @@ const get = async <T>(
 ): Promise<AxiosResponse<T> | AxiosError['response']> => {
   try {
     const res = await api.get<T>(url, config);
+    console.log(res);
+
     return res;
   } catch (e) {
+    console.log(e);
+
     return e.resonse;
   }
 };
@@ -24,6 +28,8 @@ export const getUserById = async (userId: number) => {
   const res = await get<UserApiResponse>(
     `users/${userId}?order=desc&sort=reputation&site=stackoverflow`,
   );
+  console.log(res);
+
   const user = userDatatransormer(res?.data, userId);
 
   return user;

@@ -1,4 +1,4 @@
-import React, {ReactElement} from 'react';
+import React, {ReactElement, useContext} from 'react';
 import Animated, {Layout, LightSpeedInRight} from 'react-native-reanimated';
 import {SCRREN_WIDTH} from '../helpers/screenHelpers';
 import {ItemQuestions} from '../services/types';
@@ -9,6 +9,7 @@ import {View} from 'react-native';
 import {ColorPalette} from '../Themes/Colors';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import AnsweredBadge from './AnsweredBadge';
+import {WebViewModalContext} from './common/WebView/WebViewModalProvider';
 
 const Tag = ({tag}: {tag: string}): ReactElement => {
   return (
@@ -19,6 +20,12 @@ const Tag = ({tag}: {tag: string}): ReactElement => {
 };
 
 export default ({data}: {data: ItemQuestions}): ReactElement => {
+  const {handleOpen} = useContext(WebViewModalContext);
+
+  const handleWebViewModalOpen = () => {
+    handleOpen(data.link);
+  };
+
   return (
     <Animated.View entering={LightSpeedInRight} style={styles.shadowWrapper}>
       <View style={styles.container}>
@@ -33,7 +40,9 @@ export default ({data}: {data: ItemQuestions}): ReactElement => {
           ))}
         </View>
         <View style={styles.btn}>
-          <TouchableOpacity style={styles.btnContainer}>
+          <TouchableOpacity
+            onPress={handleWebViewModalOpen}
+            style={styles.btnContainer}>
             <Text style={styles.btnText}>OPEN QUESTION</Text>
           </TouchableOpacity>
         </View>

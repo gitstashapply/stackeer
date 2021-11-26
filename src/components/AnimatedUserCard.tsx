@@ -31,6 +31,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 8,
     elevation: 2,
-    marginTop: 50,
+    marginTop: 24,
   },
 });

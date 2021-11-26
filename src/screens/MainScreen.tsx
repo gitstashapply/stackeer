@@ -7,11 +7,14 @@ import Animated, {
   useSharedValue,
   withTiming,
   LightSpeedInRight,
+  FadeIn,
+  FadeOut,
 } from 'react-native-reanimated';
 import AnimatedSearchInput from '../components/AnimatedSearchInput';
 import AnimatedUserCard from '../components/AnimatedUserCard';
+import GreetingComponent from '../components/GreetingComponent';
 import QuestionCard from '../components/QuestionCard';
-import {Text} from '../components/Text';
+import {Text, Title} from '../components/Text';
 import {isNumber} from '../helpers/inputHelpers';
 import {SCREEN_HEIGHT, SCRREN_WIDTH} from '../helpers/screenHelpers';
 import {getQuestionsByUserId, getUserById} from '../services/apiService';
@@ -71,6 +74,11 @@ export default () => {
 
   return (
     <>
+      {!userData && (
+        <Animated.View entering={FadeIn} exiting={FadeOut}>
+          <GreetingComponent />
+        </Animated.View>
+      )}
       <Animated.View style={styles.container}>
         <AnimatedSearchInput
           handleSubmit={onSubmit}
@@ -80,7 +88,7 @@ export default () => {
         />
         {userData && <AnimatedUserCard userData={userData} />}
         {questonsData && (
-          <ScrollView style={{height: 100, paddingVertical: 24}} horizontal>
+          <ScrollView style={styles.questionsContainer} horizontal>
             {renderQuestions()}
           </ScrollView>
         )}
@@ -95,6 +103,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: ColorPalette.MAIN,
-    // padding: 20,
+  },
+  questionsContainer: {
+    paddingVertical: 24,
   },
 });
