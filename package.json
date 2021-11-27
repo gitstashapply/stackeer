@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
+    "test": "jest --silent",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "postinstall": "patch-package && rm -rf ./node_modules/react-native-reanimated/react-native-reanimated.d.ts",
