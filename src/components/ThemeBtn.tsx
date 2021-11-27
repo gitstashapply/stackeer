@@ -9,7 +9,7 @@ export default () => {
   return (
     <TextButton
       testID={'changeColorBtn'}
-      style={styles.continer}
+      style={styles.container}
       text={'PRESS ME TO CHANGE COLOR MODE'}
       onPress={changeMode}
     />
@@ -17,7 +17,7 @@ export default () => {
 };
 
 const styles = StyleSheet.create({
-  continer: {
+  container: {
     paddingHorizontal: 20,
     marginVertical: 12,
   },

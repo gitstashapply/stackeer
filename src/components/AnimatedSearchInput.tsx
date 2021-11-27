@@ -15,7 +15,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import {ColorPalette} from '../themes/Colors';
 import {useColors} from './common/Colors/ColorsProvider';
-import {Caption, Text} from './Text';
+import {Caption} from './Text';
 
 const {width} = Dimensions.get('screen');
 
@@ -136,21 +136,17 @@ export default ({
 
       {!!animatedValue.value && (
         <Caption
-          style={{
-            alignSelf: 'center',
-            textAlign: 'center',
-            color: colors.SECONDARY,
-            marginTop: 4,
-          }}>{`Enter user id\npress search icon for search`}</Caption>
+          style={[
+            styles.infoMsg,
+            {color: colors.SECONDARY},
+          ]}>{`Enter user id\npress search icon for search`}</Caption>
       )}
       {!isValid && !!inputValue && (
         <Caption
-          style={{
-            alignSelf: 'center',
-            textAlign: 'center',
-            color: colors.ACCENT,
-            marginTop: 4,
-          }}>{`BAD GUY/GIRL! Only numbers allowed`}</Caption>
+          style={[
+            styles.errorTxt,
+            {color: colors.ACCENT},
+          ]}>{`BAD GUY/GIRL! Only numbers allowed`}</Caption>
       )}
     </TouchableOpacity>
   );
@@ -177,5 +173,15 @@ const styles = StyleSheet.create({
   input: {
     alignSelf: 'center',
     color: ColorPalette.MAIN,
+  },
+  errorTxt: {
+    alignSelf: 'center',
+    textAlign: 'center',
+    marginTop: 4,
+  },
+  infoMsg: {
+    alignSelf: 'center',
+    textAlign: 'center',
+    marginTop: 4,
   },
 });

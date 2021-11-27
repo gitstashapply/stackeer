@@ -27,7 +27,6 @@ export default ({userData}: Props) => {
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 20,
-    // height: '30%',
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     borderRadius: 20,
