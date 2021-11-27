@@ -3,7 +3,7 @@ import WebViewModal from './WebViewModal';
 
 const initialValues = {
   isModalOpened: false,
-  url: null,
+  url: '',
   handleClose: () => {},
   handleOpen: (a: string) => {},
 };
@@ -12,7 +12,7 @@ export const WebViewModalContext =
 
 export const useWebViewModal = () => {
   const [isModalOpened, setModalOpened] = useState<boolean>(false);
-  const [url, setUrl] = useState<string | null>(null);
+  const [url, setUrl] = useState<string>('');
 
   const setModalOpen = (url: string) => {
     setUrl(url);
@@ -21,11 +21,13 @@ export const useWebViewModal = () => {
 
   const setModalClose = () => {
     setModalOpened(false);
-    setUrl(null);
+    setUrl('');
   };
 
   const handleOpen = useCallback((url: string) => {
-    setModalOpen(url);
+    if (url) {
+      setModalOpen(url);
+    }
   }, []);
   const handleClose = useCallback(() => {
     setModalClose();

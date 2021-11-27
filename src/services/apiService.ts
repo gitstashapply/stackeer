@@ -18,8 +18,7 @@ const get = async <T>(
 
     return res;
   } catch (e) {
-    console.log(e);
-    throw new Error(e);
+    throw new Error();
   }
 };
 

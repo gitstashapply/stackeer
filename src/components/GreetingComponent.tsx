@@ -21,7 +21,7 @@ const AnimatedTitle = Animated.createAnimatedComponent(RNText);
 export default () => {
   const {colors} = useColors();
 
-  const animation = useSharedValue('#fff');
+  const animation = useSharedValue<string | number>('#fff');
 
   const [rv, setRv] = useState(Math.random());
 
@@ -43,10 +43,6 @@ export default () => {
         runOnJS(setRv)(Math.random());
       },
     );
-
-    // return () => {
-    //   cancelAnimation(animation);
-    // };
   }, [rv]);
 
   const {handleOpen} = useContext(WebViewModalContext);

@@ -34,7 +34,6 @@ export default ({user}: {user: ItemsEntity}) => {
           <Title style={{color: colors.MAIN}}>{user.display_name}</Title>
           <Caption>{`Reputation: ${user.reputation}`}</Caption>
           <Caption>{`Accept rate: ${user.accept_rate}`}</Caption>
-
           <Caption style={{color: colors.GRAY}}>{user.location}</Caption>
           {renderBadges()}
         </View>

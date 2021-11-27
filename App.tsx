@@ -9,25 +9,22 @@
  */
 
 import React from 'react';
-import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
+import {StatusBar} from 'react-native';
 import MainScreen from './src/screens/MainScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import WebViewModalProvider from './src/components/common/WebView/WebViewModalProvider';
-import {View} from 'react-native';
-import {
-  ColorsProvider,
-  useColors,
-} from './src/components/common/Colors/ColorsProvider';
+import {ColorsProvider} from './src/components/common/Colors/ColorsProvider';
+import {LogBox} from 'react-native';
+
+LogBox.ignoreLogs(['Can']); // there is a reason for it, don't worry I know what I'm doing. I will not break anything. Everyone secured! I'm promise. Really. Please contact me if you read this comment. Cause it means you looking my code. And its cool. Cheers! Bye!
 
 Icon.loadFont();
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
   return (
     <ColorsProvider>
       <>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <StatusBar barStyle={'default'} />
         <WebViewModalProvider>
           <MainScreen />
         </WebViewModalProvider>

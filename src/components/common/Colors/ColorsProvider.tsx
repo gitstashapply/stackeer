@@ -2,14 +2,6 @@ import React, {useContext, useState} from 'react';
 import {ReactChild} from 'react';
 import {Appearance} from 'react-native';
 
-export enum ColorPalette {
-  MAIN = '#ef8236',
-  SECONDARY = '#FBF7F4',
-  ACCENT = '#E71313',
-  CAPTION = '#EF8236',
-  GRAY = '#808080',
-}
-
 export enum ColorPaletteDark {
   MAIN = '#ef8236',
   SECONDARY = '#FBF7F4',
@@ -63,6 +55,7 @@ export const ColorsProvider = ({children}: {children: ReactChild}) => {
   const {colors, changeMode} = _useColors();
 
   return (
+    // @ts-ignore
     <ColorsContext.Provider value={{colors, changeMode}}>
       {children}
     </ColorsContext.Provider>
