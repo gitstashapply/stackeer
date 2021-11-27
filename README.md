@@ -13,7 +13,7 @@
    Android: open project in android studio and make sure all the gradle properties installed correctly,
    run project using android studio "Run" btn or `npx run-android` from terminal
 
-**NOTICE: for best user experience with smooth animation, I suggest to run project on real device, do not use chrome debugger, it might make aniations slower and sharp
+**NOTICE: for best user experience with smooth animation I suggest to run project on a real device and using production build. Do not use chrome debugger, it might make animations slow and sharp
 For ios users don't forget to sign profile before running on real device
 **
 
@@ -46,8 +46,8 @@ I had a lot of fun to work with vanilla RN components.
 
 ## Animations:
 
-For animation 'react-native-reanimated-v2' used.
-AIl the animations/related calculations (such row 60 for instance)
+react-native-reanimated-v2 - everything you want to use.
+All the animations/related calculations (such row 60 for instance)
 are computed by UI thread and not affecting JS-thread by using 'worklets'
 See more: https://blog.swmansion.com/introducing-reanimated-2-752b913af8b3
 
