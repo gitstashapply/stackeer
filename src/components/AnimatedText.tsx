@@ -1,9 +1,6 @@
 import React, {ComponentType, RefAttributes} from 'react';
+import {TextInput} from 'react-native';
 import Animated, {useAnimatedProps} from 'react-native-reanimated';
-import {
-  NativeViewGestureHandlerProps,
-  TextInput,
-} from 'react-native-gesture-handler';
 import {AnimateProps} from 'react-native-reanimated';
 import {TextInputProps} from 'react-native';
 import {Fonts} from './Text';
@@ -11,13 +8,7 @@ import {Fonts} from './Text';
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
 type AnimatedTextInputProps = TextInputProps & {
-  text: Partial<
-    AnimateProps<
-      TextInputProps &
-        NativeViewGestureHandlerProps &
-        RefAttributes<ComponentType<any>>
-    >
-  >;
+  text: any;
 };
 
 const AnimatedText = (props: AnimatedTextInputProps) => {

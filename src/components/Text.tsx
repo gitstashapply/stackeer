@@ -1,6 +1,6 @@
 import React, {ReactChild} from 'react';
 import {Text as RNText, TextProps} from 'react-native';
-import {ColorPalette} from '../Themes/Colors';
+import {ColorPalette} from '../_themes/Colors';
 import {useColors} from './common/Colors/ColorsProvider';
 
 export enum Fonts {

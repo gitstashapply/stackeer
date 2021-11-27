@@ -8,8 +8,9 @@ export default () => {
 
   return (
     <TextButton
+      testID={'changeColorBtn'}
       style={styles.continer}
-      text={' PRESS ME TO CHANGE COLORS MODE'}
+      text={'PRESS ME TO CHANGE COLOR MODE'}
       onPress={changeMode}
     />
   );

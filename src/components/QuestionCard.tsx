@@ -6,8 +6,6 @@ import {Caption, Text, Title} from './Text';
 import {unixToFormatedDate} from '../helpers/dateHelpers';
 import {StyleSheet} from 'react-native';
 import {View} from 'react-native';
-import {ColorPalette} from '../Themes/Colors';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import AnsweredBadge from './AnsweredBadge';
 import {WebViewModalContext} from './common/WebView/WebViewModalProvider';
 import {useColors} from './common/Colors/ColorsProvider';

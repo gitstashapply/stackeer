@@ -13,7 +13,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
-import {ColorPalette} from '../Themes/Colors';
+import {ColorPalette} from '../_themes/Colors';
 import {useColors} from './common/Colors/ColorsProvider';
 import {Caption, Text} from './Text';
 
@@ -103,6 +103,7 @@ export default ({
 
   return (
     <TouchableOpacity
+      testID={'animatedSearchInput'}
       disabled={!isValid && !!animatedValue.value}
       onPress={handlePress}>
       <Animated.View

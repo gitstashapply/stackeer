@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
-import {View, Text as RNText} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {View, Text as RNText, TouchableOpacity} from 'react-native';
 import {useColors} from './common/Colors/ColorsProvider';
 import {WebViewModalContext} from './common/WebView/WebViewModalProvider';
 import {Title} from './Text';

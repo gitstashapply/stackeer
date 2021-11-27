@@ -4,7 +4,7 @@ import {QuestionsApiResponse, UserApiResponse} from './types';
 
 const BASE_URL = 'https://api.stackexchange.com/2.3/';
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: BASE_URL,
 });
 

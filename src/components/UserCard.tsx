@@ -1,12 +1,12 @@
 import React from 'react';
-import {View, Image, Text, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
 import {SCRREN_WIDTH} from '../helpers/screenHelpers';
 import {ItemsEntity} from '../services/types';
 import Badge from './Badge';
 import {Caption, Title} from './Text';
-import SilverBadge from '../silverBadge.png';
-import BronzeBadge from '../bronzeBadge.png';
-import GoldBadge from '../goldBadge.png';
+import SilverBadge from '../img/silverBadge.png';
+import BronzeBadge from '../img/bronzeBadge.png';
+import GoldBadge from '../img/goldBadge.png';
 import {useColors} from './common/Colors/ColorsProvider';
 
 export default ({user}: {user: ItemsEntity}) => {
