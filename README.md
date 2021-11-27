@@ -75,3 +75,4 @@ So, from POV of MVP - this project is quite good, from Product POV it must me im
 4. UX improvements
    e.g. - It will be good to have a "springified" flatlist for questions entities, sticky header for user info, using gesture handler and reanimated.
 5. Refactor/Tech debts
+6. Better app icon XD
