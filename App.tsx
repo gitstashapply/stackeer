@@ -23,7 +23,6 @@ Icon.loadFont();
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
-  const {colors} = useColors();
 
   return (
     <ColorsProvider>

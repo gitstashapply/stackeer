@@ -44,6 +44,15 @@ export default ({data}: {data: ItemQuestions}): ReactElement => {
             <Tag tag={tag} key={tag} />
           ))}
         </View>
+        <Text
+          style={{
+            color: colors.MAIN,
+          }}>{`Answers: ${data.answer_count}`}</Text>
+        <Text
+          style={{
+            color: colors.MAIN,
+          }}>{`Views: ${data.view_count}`}</Text>
+
         <View style={styles.btn}>
           <TouchableOpacity
             onPress={handleWebViewModalOpen}

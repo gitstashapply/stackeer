@@ -1,5 +1,5 @@
 import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios';
-import {userDatatransormer} from './apiTransformer';
+import {userDatatransormer} from './tranfomers';
 import {ItemQuestions, QuestionsApiResponse, UserApiResponse} from './types';
 
 const BASE_URL = 'https://api.stackexchange.com/2.3/';

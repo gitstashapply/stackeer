@@ -14,6 +14,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import {ColorPalette} from '../Themes/Colors';
 import {useColors} from './common/Colors/ColorsProvider';
+import {Caption, Text} from './Text';
 
 const {width} = Dimensions.get('screen');
 
@@ -111,6 +112,25 @@ export default ({
           keyboardType="numeric"
         />
       </Animated.View>
+
+      {!!animatedValue.value && (
+        <Caption
+          style={{
+            alignSelf: 'center',
+            textAlign: 'center',
+            color: colors.SECONDARY,
+            marginTop: 4,
+          }}>{`Enter user id\npress search icon for search`}</Caption>
+      )}
+      {!isValid && !!inputValue && (
+        <Caption
+          style={{
+            alignSelf: 'center',
+            textAlign: 'center',
+            color: colors.ACCENT,
+            marginTop: 4,
+          }}>{`BAD GUY/GIRL! Only numbers allowed`}</Caption>
+      )}
     </TouchableOpacity>
   );
 };

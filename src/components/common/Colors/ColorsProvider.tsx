@@ -21,7 +21,7 @@ export enum ColorPaletteDark {
 export enum ColorPaletteLight {
   MAIN = '#FBF7F4',
   SECONDARY = '#ef8236',
-  ACCENT = '#FBF7F4',
+  ACCENT = '#E71313',
   CAPTION = '#FBF7F4',
   GRAY = '#FBF7F4',
 }
@@ -41,7 +41,7 @@ export const _useColors = () => {
 
   let colors;
 
-  if (isDarkMode) {
+  if (!isDarkMode) {
     colors = ColorPaletteDark;
   } else {
     colors = ColorPaletteLight;
