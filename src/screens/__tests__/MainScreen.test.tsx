@@ -4,10 +4,6 @@ import MainScreen from '../MainScreen';
 
 import {render} from '@testing-library/react-native';
 
-it('renders correctly', () => {
-  render(<MainScreen />);
-});
-
 const text = {
   stack: 'STACK',
   err: 'ERR',
@@ -15,9 +11,13 @@ const text = {
   aboutUs: 'ABOUT US',
 };
 describe('<MainScreen /> content', () => {
-  const {getByTestId, getByText} = render(<MainScreen />);
+  it('renders correctly', () => {
+    render(<MainScreen />);
+  });
 
   it('Should render all content', () => {
+    const {getByTestId, getByText} = render(<MainScreen />);
+
     getByText(text.stack);
     getByText(text.itsVeryImportant);
     getByText(text.aboutUs);
