@@ -1,6 +1,6 @@
 import React, {ReactElement} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {ColorPalette} from '../_themes/Colors';
+import {ColorPalette} from '../themes/Colors';
 import {useColors} from './common/Colors/ColorsProvider';
 import {Caption} from './Text';
 

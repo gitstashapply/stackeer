@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import {SCREEN_HEIGHT} from '../../../helpers/screenHelpers';
-import {ColorPalette} from '../../../_themes/Colors';
+import {ColorPalette} from '../../../themes/Colors';
 import {Text} from '../../Text';
 import WebView from './WebView';
 import {WebViewModalContext} from './WebViewModalProvider';

@@ -13,7 +13,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
-import {ColorPalette} from '../_themes/Colors';
+import {ColorPalette} from '../themes/Colors';
 import {useColors} from './common/Colors/ColorsProvider';
 import {Caption, Text} from './Text';
 
