@@ -1,5 +1,7 @@
 # Stackeer
 
+![](https://ibb.co/zQ10Ndh)
+
 ## Install & RUN:
 
 1. Make sure you've got all the nedded for DEV environment, if not, please check https://reactnative.dev/docs/environment-setup
