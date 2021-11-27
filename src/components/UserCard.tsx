@@ -4,7 +4,6 @@ import {SCRREN_WIDTH} from '../helpers/screenHelpers';
 import {ItemsEntity} from '../services/types';
 import Badge from './Badge';
 import {Caption, Title} from './Text';
-//@ts-ignore
 import SilverBadge from '../silverBadge.png';
 import BronzeBadge from '../bronzeBadge.png';
 import GoldBadge from '../goldBadge.png';
@@ -26,7 +25,11 @@ export default ({user}: {user: ItemsEntity}) => {
   return (
     <View style={[styles.card]}>
       <View style={styles.flexRow}>
-        <Image style={styles.img} source={{uri: user.profile_image}} />
+        <Image
+          style={styles.img}
+          resizeMode={'contain'}
+          source={{uri: user.profile_image}}
+        />
         <View style={{marginHorizontal: 20}}>
           <Title style={{color: colors.MAIN}}>{user.display_name}</Title>
           <Caption>{`Reputation: ${user.reputation}`}</Caption>
@@ -42,7 +45,7 @@ export default ({user}: {user: ItemsEntity}) => {
 
 const styles = StyleSheet.create({
   card: {
-    padding: 20,
+    padding: 16,
     width: SCRREN_WIDTH * 0.87,
   },
   flexRow: {

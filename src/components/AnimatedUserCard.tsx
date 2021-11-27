@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import Animated, {ZoomIn} from 'react-native-reanimated';
+import Animated, {Layout, ZoomIn} from 'react-native-reanimated';
 import {ItemsEntity} from '../services/types';
 import {useColors} from './common/Colors/ColorsProvider';
 import UserCard from './UserCard';
@@ -17,6 +17,7 @@ export default ({userData}: Props) => {
   return (
     <Animated.View
       entering={ZoomIn}
+      layout={Layout.springify()}
       style={[styles.container, {backgroundColor: colors.SECONDARY}]}>
       <UserCard user={userData} />
     </Animated.View>
@@ -25,14 +26,15 @@ export default ({userData}: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: '30%',
+    marginHorizontal: 20,
+    // height: '30%',
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {width: 4, height: 4},
-    shadowOpacity: 0.4,
-    shadowRadius: 8,
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
     elevation: 2,
     marginTop: 24,
   },

@@ -16,6 +16,7 @@ export enum ColorPaletteDark {
   ACCENT = '#E71313',
   CAPTION = '#EF8236',
   GRAY = '#808080',
+  BLACK = '#000',
 }
 
 export enum ColorPaletteLight {
@@ -24,6 +25,7 @@ export enum ColorPaletteLight {
   ACCENT = '#E71313',
   CAPTION = '#FBF7F4',
   GRAY = '#FBF7F4',
+  BLACK = '#000',
 }
 
 export const _useColors = () => {

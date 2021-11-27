@@ -12,6 +12,7 @@ import AnsweredBadge from './AnsweredBadge';
 import {WebViewModalContext} from './common/WebView/WebViewModalProvider';
 import {useColors} from './common/Colors/ColorsProvider';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {TextButton} from './common/Button';
 
 const Tag = ({tag}: {tag: string}): ReactElement => {
   const {colors} = useColors();
@@ -32,10 +33,15 @@ export default ({data}: {data: ItemQuestions}): ReactElement => {
   };
 
   return (
-    <Animated.View entering={LightSpeedInRight} style={styles.shadowWrapper}>
+    <Animated.View
+      layout={Layout.springify()}
+      entering={LightSpeedInRight}
+      style={styles.shadowWrapper}>
       <View style={[styles.container, {backgroundColor: colors.SECONDARY}]}>
         <AnsweredBadge isAnswered={data.is_answered} />
-        <Title style={{fontSize: 18, color: colors.MAIN}}>{data.title}</Title>
+        <Title numberOfLines={3} style={{fontSize: 16, color: colors.MAIN}}>
+          {data.title}
+        </Title>
         <Caption style={{color: '#808080'}}>{`Created: ${unixToFormatedDate(
           data.creation_date,
         )}`}</Caption>
@@ -54,13 +60,15 @@ export default ({data}: {data: ItemQuestions}): ReactElement => {
           }}>{`Views: ${data.view_count}`}</Text>
 
         <View style={styles.btn}>
-          <TouchableOpacity
+          <TextButton
             onPress={handleWebViewModalOpen}
-            style={styles.btnContainer}>
-            <Text style={[styles.btnText, {color: colors.MAIN}]}>
-              OPEN QUESTION
-            </Text>
-          </TouchableOpacity>
+            style={styles.btnContainer}
+            text={
+              <Text style={[styles.btnText, {color: colors.MAIN}]}>
+                VIEW MORE
+              </Text>
+            }
+          />
         </View>
       </View>
     </Animated.View>
@@ -74,8 +82,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 12,
     shadowColor: '#000',
     shadowOffset: {width: 4, height: 4},
-    shadowOpacity: 0.4,
-    shadowRadius: 8,
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
     elevation: 2,
   },
   container: {

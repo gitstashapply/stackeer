@@ -1,6 +1,6 @@
 import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios';
 import {userDatatransormer} from './tranfomers';
-import {ItemQuestions, QuestionsApiResponse, UserApiResponse} from './types';
+import {QuestionsApiResponse, UserApiResponse} from './types';
 
 const BASE_URL = 'https://api.stackexchange.com/2.3/';
 
@@ -19,26 +19,31 @@ const get = async <T>(
     return res;
   } catch (e) {
     console.log(e);
-
-    return e.resonse;
+    throw new Error(e);
   }
 };
 
 export const getUserById = async (userId: number) => {
-  const res = await get<UserApiResponse>(
-    `users/${userId}?order=desc&sort=reputation&site=stackoverflow`,
-  );
-  console.log(res);
-
-  const user = userDatatransormer(res?.data, userId);
-
-  return user;
+  try {
+    const res = await get<UserApiResponse>(
+      `users/${userId}?order=desc&sort=reputation&site=stackoverflow`,
+    );
+    const user = userDatatransormer(res?.data, userId);
+    return user;
+  } catch (e) {
+    // ERROR HANDLING...
+    return {error: true};
+  }
 };
 
 export const getQuestionsByUserId = async (userId: number) => {
-  const res = await get<QuestionsApiResponse>(
-    `users/${userId}/questions?order=desc&sort=activity&site=stackoverflow`,
-  );
-
-  return res?.data.items;
+  try {
+    const res = await get<QuestionsApiResponse>(
+      `users/${userId}/questions?order=desc&sort=activity&site=stackoverflow`,
+    );
+    return res?.data.items;
+  } catch (e) {
+    // ERROR HANDLING...
+    return {error: true};
+  }
 };

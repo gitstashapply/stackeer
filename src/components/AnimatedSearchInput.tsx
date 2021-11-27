@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Dimensions,
   TextInput,
+  Keyboard,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Animated, {
@@ -26,6 +27,7 @@ interface AnimatedInputProps {
   inputValue: string;
   isValid: boolean;
   handleSubmit: () => void;
+  reset?: boolean;
 }
 
 export default ({
@@ -33,6 +35,7 @@ export default ({
   inputValue,
   isValid,
   handleSubmit,
+  reset,
 }: AnimatedInputProps) => {
   const animatedValue = useSharedValue(0);
   const validationAnimatedValue = useSharedValue<number | string>(
@@ -42,6 +45,12 @@ export default ({
   const {colors} = useColors();
 
   const inputRef = createRef<TextInput>();
+
+  useEffect(() => {
+    if (reset) {
+      animatedValue.value = 0;
+    }
+  }, [reset]);
 
   useEffect(() => {
     setValidationAnimatedValue();
@@ -55,7 +64,9 @@ export default ({
 
   const animatedStylesContainer = useAnimatedStyle(() => {
     return {
-      width: withSpring(animatedValue.value === 0 ? 70 : width * 0.87),
+      width: animatedValue.value
+        ? withSpring(width * 0.87)
+        : withTiming(70, {duration: 250}),
     };
   });
 
@@ -67,10 +78,12 @@ export default ({
 
   const textInputAnimatedStyles = useAnimatedStyle(() => {
     return {
-      width: withSpring(animatedValue.value ? width * 0.6 : 0),
-      height: withSpring(animatedValue.value ? 40 : 0),
+      width: animatedValue.value
+        ? withSpring(width * 0.6)
+        : withTiming(0, {duration: 250}),
+      height: 40,
       padding: animatedValue.value ? 10 : 0,
-      alignSelf: 'flex-end',
+      alignSelf: 'center',
     };
   });
 
@@ -82,6 +95,7 @@ export default ({
   const handlePress = () => {
     if (isValid) {
       handleSubmit();
+      Keyboard.dismiss();
     } else {
       onSearchBtnPress();
     }
@@ -103,14 +117,20 @@ export default ({
           name={'search'}
           color={colors.MAIN}
         />
-        <AnimatedTextInput
-          ref={inputRef}
-          style={[textInputAnimatedStyles, styles.input, {color: colors.MAIN}]}
-          onChangeText={onChange}
-          value={inputValue}
-          selectionColor={colors.MAIN}
-          keyboardType="numeric"
-        />
+        {
+          <AnimatedTextInput
+            ref={inputRef}
+            style={[
+              textInputAnimatedStyles,
+              styles.input,
+              {color: colors.MAIN},
+            ]}
+            onChangeText={onChange}
+            value={inputValue}
+            selectionColor={colors.MAIN}
+            keyboardType="numeric"
+          />
+        }
       </Animated.View>
 
       {!!animatedValue.value && (
@@ -148,13 +168,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     shadowColor: '#000',
     shadowOffset: {width: 4, height: 4},
-    shadowOpacity: 0.4,
-    shadowRadius: 8,
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
     elevation: 2,
     flexDirection: 'row',
   },
   input: {
-    // position: 'absolute',
     alignSelf: 'center',
     color: ColorPalette.MAIN,
   },

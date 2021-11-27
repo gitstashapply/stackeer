@@ -1,11 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  TouchableOpacity,
-  FlatList,
-  InteractionManager,
-  StyleSheet,
-} from 'react-native';
+import {View, FlatList, InteractionManager, StyleSheet} from 'react-native';
 import {getQuestionsByUserId} from '../services/apiService';
 import {questionSectionSortingMetadata, sortBy} from '../services/tranfomers';
 import {ItemQuestions} from '../services/types';
@@ -68,6 +62,7 @@ export default ({userId}: any) => {
 
 const styles = StyleSheet.create({
   questionsContainer: {
+    flex: 1,
     paddingVertical: 24,
   },
   container: {

@@ -1,18 +1,55 @@
-import React, {useContext, useState} from 'react';
-import {View} from 'react-native';
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
+import {View, Text as RNText} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {ColorPalette} from '../Themes/Colors';
 import {useColors} from './common/Colors/ColorsProvider';
-import WebViewModal from './common/WebView/WebViewModal';
-import {
-  useWebViewModal,
-  WebViewModalContext,
-} from './common/WebView/WebViewModalProvider';
+import {WebViewModalContext} from './common/WebView/WebViewModalProvider';
 import {Title} from './Text';
+import Animated, {
+  cancelAnimation,
+  runOnJS,
+  useAnimatedStyle,
+  useDerivedValue,
+  useSharedValue,
+  withDelay,
+  withRepeat,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
+
+const AnimatedTitle = Animated.createAnimatedComponent(RNText);
 
 export default () => {
-  const {handleOpen} = useContext(WebViewModalContext);
   const {colors} = useColors();
+
+  const animation = useSharedValue('#fff');
+
+  const [rv, setRv] = useState(Math.random());
+
+  const flashTitleAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      color: animation.value,
+    };
+  });
+
+  useEffect(() => {
+    animation.value = withRepeat(
+      withSequence(
+        withTiming(colors.SECONDARY, {duration: 100}),
+        withDelay(rv * 20 * 150, withTiming(colors.BLACK, {duration: 100})),
+      ),
+      1,
+      false,
+      () => {
+        runOnJS(setRv)(Math.random());
+      },
+    );
+
+    // return () => {
+    //   cancelAnimation(animation);
+    // };
+  }, [rv]);
+
+  const {handleOpen} = useContext(WebViewModalContext);
 
   const openWebView = () => {
     handleOpen(
@@ -20,14 +57,15 @@ export default () => {
     );
   };
 
-  console.log(colors.MAIN);
-
   return (
     <View style={{padding: 20, flex: 0, backgroundColor: colors.MAIN}}>
-      <Title style={{fontSize: 52, color: colors.SECONDARY}}>STACKEER</Title>
-      <Title style={{fontSize: 36, color: colors.SECONDARY}}>
-        ITS VERY IMPORTANT APP
-      </Title>
+      <View style={{flexDirection: 'row'}}>
+        <Title style={{fontSize: 52, color: colors.SECONDARY}}>STACK</Title>
+        <Title style={{fontSize: 52, color: colors.SECONDARY}}>
+          <AnimatedTitle style={flashTitleAnimatedStyle}>{'EER'}</AnimatedTitle>
+        </Title>
+      </View>
+      <Title style={[{fontSize: 36}]}>ITS VERY IMPORTANT APP</Title>
       <TouchableOpacity onPress={openWebView}>
         <Title
           style={{
