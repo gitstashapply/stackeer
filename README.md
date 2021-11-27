@@ -13,7 +13,10 @@
    Android: open project in android studio and make sure all the gradle properties installed correctly,
    run project using android studio "Run" btn or `npx run-android` from terminal
 
-**NOTICE: for best user experience with smooth animation I suggest to run project on a real device and using production build. Do not use chrome debugger, it might make animations slow and sharp
+**NOTICE: for best user experience with smooth animation I suggest to run project on a real device and using production build.
+`npx react-native run-ios --configuration Release` - for ios
+`npx react-native run-android --variant=release` - for android
+Do not use chrome debugger, it might make animations slow and sharp
 For ios users don't forget to sign profile before running on real device
 **
 
